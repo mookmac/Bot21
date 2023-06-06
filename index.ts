@@ -16,6 +16,7 @@ import {
 import { TeamsBot } from "./teamsBot";
 import config from "./config";
 import { AI, Application, ConversationHistory, DefaultPromptManager, DefaultTurnState, OpenAIModerator, OpenAIPlanner } from "@microsoft/teams-ai";
+import { randomInt } from 'crypto';
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
@@ -68,7 +69,9 @@ server.listen(process.env.port || process.env.PORT || 3978, () => {
 //Teams AI Library
 
 //create state
-interface ConversationState {}
+interface ConversationState {
+  InitiativeRoll: number;
+}
 type ApplicationTurnState = DefaultTurnState<ConversationState>;
 
 //define AI library components
@@ -87,7 +90,7 @@ const moderator = new OpenAIModerator({
 });
 
 //define prompt manager
-const promptManager = new DefaultPromptManager(path.join(__dirname, "./prompts"));
+const promptManager = new DefaultPromptManager<ApplicationTurnState>(path.join(__dirname, "./prompts"));
 
 //define storage
 const storage = new MemoryStorage();
@@ -117,6 +120,15 @@ app.ai.action(AI.FlaggedOutputActionName,async (context, state,data) => {
   await context.sendActivity("Bot's response was flagged by moderator");
   return false;
 });
+
+app.ai.action('RollForInitiative', async (context: TurnContext, state: ApplicationTurnState) => {
+  state.conversation.value.InitiativeRoll = randomInt(1,20);
+  const response = "Initiative: " + state.conversation.value.InitiativeRoll;
+  await context.sendActivity(response);
+  ConversationHistory.appendToLastLine(state, ` THEN SAY ${response}`);
+  return false;
+});
+
   
 //define history
 app.message("/history", async(context,state) => {

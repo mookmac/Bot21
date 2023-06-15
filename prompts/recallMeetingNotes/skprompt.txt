@@ -1,0 +1,7 @@
+Given the following notes about previous meetings between a manager and an employee, provide a summary in 500 words or less. 
+Give higher weighting to notes with a more recent date.
+
+notes:
+{{$temp.filteredMeetingNotes}}
+
+Summary:

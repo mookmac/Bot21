@@ -1,0 +1,16 @@
+{
+    "schema": 1,
+    "description": "Recall meeting notes",
+    "type": "completion",
+    "completion": {
+      "max_tokens": 350,
+      "temperature": 0.8,
+      "top_p": 0.0,
+      "presence_penalty": 0.6,
+      "frequency_penalty": 0.0,
+      "stop_sequences": [
+        "Human:",
+        "AI:"
+      ]
+    }
+  }

@@ -93,8 +93,8 @@ server.listen(process.env.port || process.env.PORT || 3978, () => {
 
 //create state
 export interface ConversationState extends DefaultConversationState {
-  InitiativeRoll: number;
   talkingPointSuggestions: string[];
+  welcomed: boolean;
 }
 export interface UserState extends DefaultUserState {
   managerName: string;
@@ -103,6 +103,7 @@ export interface UserState extends DefaultUserState {
 }
 export interface TempState extends DefaultTempState {
   prompt: string;
+  filteredMeetingNotes: IMeetingNotes[];
 }
 export type ApplicationTurnState = DefaultTurnState<ConversationState, UserState, TempState>;
 
@@ -148,13 +149,14 @@ const app = new Application<ApplicationTurnState>({
 });
 
 app.turn('beforeTurn', async (context: TurnContext, state: ApplicationTurnState) => {
-  if(!state.user.value.managerName){
+  if(!state.conversation.value.welcomed){
     state.user.value.managerName = (context.activity.from?.name ?? '');
     if (state.user.value.managerName.length == 0){
       state.user.value.managerName = 'Michael Scott';
     }
 
     state.temp.value.prompt = 'welcome';
+    state.conversation.value.welcomed = true;
     return true;
   }  
   

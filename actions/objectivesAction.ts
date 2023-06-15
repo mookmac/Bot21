@@ -69,7 +69,7 @@ async function updateObjectives(
         if (employeeToUpdateIndex != -1)
         {
             state.user.value.employees[employeeToUpdateIndex] = updatedEmployee;
-            await context.sendActivity(`Ok, I've updated the objective for ${data.employee.name}. What can I do for you next?`);
+            await context.sendActivity(`Ok, I've updated the objective for ${data.employee}. What can I do for you next?`);
             return false;
         }
         else

@@ -19,8 +19,8 @@
         "full": "Bot21 - a 1-2-1 meeting assistant"
     },
     "description": {
-        "short": "short description for AlexTestBot1",
-        "full": "full description for AlexTestBot1"
+        "short": "A chatbot to help line managers run effective 1-2-1 meetings",
+        "full": "Bot21 can track employee objectives for multiple employees, suggest talking points for meetings, store notes about meetings, and provide icebreakers."
     },
     "accentColor": "#FFFFFF",
     "bots": [

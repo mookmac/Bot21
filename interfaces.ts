@@ -14,7 +14,7 @@ export interface IObjective {
 
 export interface IDataEntities {
     operation: string;
-    employee: IEmployee;
+    employee: string;
 }
 
 export interface IMeetingNotes {

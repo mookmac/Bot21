@@ -56,7 +56,7 @@ interface Objective {
 }
 
 interface Employee {
-    employeeName: string;
+    name: string;
     objectives: Objective[];
 }
 

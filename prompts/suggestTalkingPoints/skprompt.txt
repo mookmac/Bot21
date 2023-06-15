@@ -26,6 +26,7 @@ Avoid repetition of responses/themes.
 Prefer responses that are relevant to the objectives provided under "Employee objectives:"
 Prefer responses that are relevant to the notes from previous meetings provided under "Notes from previous meetings:"
 Only refer to items in "Employee objectives:" and "Notes from previous meetings:" that match the employee name that the Human is asking about.
+The talking points should be presented as short bullet points or concise summaries, not as dialouge.
 
 Human: {{$input}}
 Bot21:

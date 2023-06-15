@@ -1,0 +1,24 @@
+You are going to write a JSON object for the employee, containing an array of objectives. The values for the JSON object must be interpreted from the Human's inputs in the following conversation:
+
+Conversation:
+```
+{{$history}}
+```
+
+Now consider the following TypeScript Interface for the JSON schema:
+
+interface Objective {
+    title: string;
+    description: string;
+    targetCompletionDate: Date;
+    measure: string;
+    progress: number;
+}
+
+interface Employee {
+    employeeName: string;
+    objectives: Objective[];
+}
+
+Write the response according to the Employee schema. 
+On the response, include only the JSON.

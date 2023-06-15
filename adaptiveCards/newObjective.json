@@ -1,0 +1,96 @@
+{
+    "type": "AdaptiveCard",
+    "body": [
+        {
+            "type": "TextBlock",
+            "text": "New Objective",
+            "wrap": true,
+            "weight": "Bolder",
+            "size": "Large"
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "TextBlock",
+                    "text": "Employee Name:",
+                    "wrap": true
+                },
+                {
+                    "type": "Input.Text",
+                    "id": "employeeName"
+                },
+                {
+                    "type": "Container",
+                    "items": [
+                        {
+                            "type": "Container",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "text": "Title:",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "Input.Text",
+                                    "id": "title"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "text": "Description:",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "Input.Text",
+                                    "id": "description"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "text": "Target Completion Date:",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "Input.Date",
+                                    "id": "targetCompletionDate"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "text": "How to measure objective progress:",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "Input.Text",
+                                    "id": "measure"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "text": "Current Progress:",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "Input.Number",
+                                    "id": "progress"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "ActionSet",
+            "actions": [
+                {
+                    "type": "Action.Submit",
+                    "title": "Submit",
+                    "style": "positive",
+                    "data": {
+                        "verb": "newObjectiveSubmit"
+                    }
+                }
+            ]
+        }
+    ],
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.4"
+}

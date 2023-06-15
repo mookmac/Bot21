@@ -7,6 +7,7 @@ import {
 } from "botbuilder";
 import rawWelcomeCard from "./adaptiveCards/welcome.json";
 import rawLearnCard from "./adaptiveCards/learn.json";
+import rawNewObjectiveCard from "./adaptiveCards/newObjective.json";
 import { AdaptiveCards } from "@microsoft/adaptivecards-tools";
 
 export interface DataInterface {
@@ -45,10 +46,11 @@ export class TeamsBot extends TeamsActivityHandler {
           await context.sendActivity({ attachments: [CardFactory.adaptiveCard(card)] });
           break;
         }
-        case "who the best": {
-             await context.sendActivity(`Alex is the bestest!`);
-             break;
-           }
+        case "add objective": {
+          const card = AdaptiveCards.declareWithoutData(rawNewObjectiveCard).render();
+          await context.sendActivity({ attachments: [CardFactory.adaptiveCard(card)] });
+          break;
+        }
         /**
          * case "yourCommand": {
          *   await context.sendActivity(`Add your response here!`);

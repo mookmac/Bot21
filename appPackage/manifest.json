@@ -48,6 +48,10 @@
                         {
                             "title": "learn",
                             "description": "Learn about Adaptive Card and Bot Command"
+                        },
+                        {
+                            "title": "add objective",
+                            "description": "Add an objective for an employee"
                         }
                     ]
                 }

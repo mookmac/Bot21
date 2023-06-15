@@ -1,10 +1,10 @@
 {
     "schema": 1,
-    "description": "Chat with Bot21",
+    "description": "Returning employee data as JSON",
     "type": "completion",
     "completion": {
-      "max_tokens": 150,
-      "temperature": 0.3,
+      "max_tokens": 250,
+      "temperature": 0.0,
       "top_p": 0.0,
       "presence_penalty": 0.6,
       "frequency_penalty": 0.0,

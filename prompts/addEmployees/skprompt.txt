@@ -1,0 +1,125 @@
+Here's an Adpative Card template:
+```
+{
+    "type": "AdaptiveCard",
+    "body": [
+        {
+            "type": "TextBlock",
+            "text": "New Objective",
+            "wrap": true,
+            "weight": "Bolder",
+            "size": "Large"
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "TextBlock",
+                    "text": "Employee Name:",
+                    "wrap": true
+                },
+                {
+                    "type": "Input.Text",
+                    "id": ".employeeName"
+                },
+                {
+                    "type": "Container",
+                    "items": [
+                        {
+                            "type": "Container",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "text": "Title:",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "Input.Text",
+                                    "id": ".objectives[0].title"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "text": "Description:",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "Input.Text",
+                                    "id": ".objectives[0].description"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "text": "Target Completion Date:",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "Input.Date",
+                                    "id": ".objectives[0].targetCompletionDate"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "text": "How to measure objective progress:",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "Input.Text",
+                                    "id": ".objectives[0].measure"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "text": "Current Progress:",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "Input.Number",
+                                    "id": ".objectives[0].progress"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "ActionSet",
+            "actions": [
+                {
+                    "type": "Action.Submit",
+                    "title": "Submit",
+                    "style": "positive",
+                    "associatedInputs": "auto"
+                }
+            ]
+        }
+    ],
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.4"
+}
+```
+
+Instructions: 
+
+Create an adaptive card using the template above and with the Employee Name field already populated.
+On submission of the adaptive card, provide the following response exactly:
+```
+SAVING OBJECTIVES
+```
+
+Conversation History:
+```
+{{$history}}
+```
+Here's a set of lists. The key is the id of the work item and title:
+
+{{$workItems}}
+
+Here's the user's query:
+
+```
+{{$input}}
+```
+
+Use the template to create an Adaptive Card.
+Take into account any changes asked for by the user.
+Always replace the placeholder text, List n and Item n, with real data.
+
+AdaptiveCard:

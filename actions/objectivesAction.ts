@@ -16,7 +16,7 @@ export function objectivesAction(app: Application<ApplicationTurnState>): void {
             case 'update':
                 return await updateObjectives(app, context, state, data);
             default:                
-                await context.sendActivity(`Oops, my programmer hasn't implemented the ${action} path yet!`);
+                await context.sendActivity(`Oops, my programmer hasn't implemented the ${action} path of 'objectives' yet!`);
                 return true;
         }
       });
@@ -64,6 +64,7 @@ async function updateObjectives(
     else
     {
         let updatedEmployee = ResponseParser.parseJSON(newResponse) as IEmployee;
+        console.info(`\n updatedEmployee name: ${updatedEmployee.name}`);
         let employeeToUpdateIndex = state.user.value.employees.findIndex(emp => emp.name == updatedEmployee.name);
         if (employeeToUpdateIndex != -1)
         {

@@ -6,7 +6,6 @@ import {
   AdaptiveCardInvokeResponse,
 } from "botbuilder";
 import rawWelcomeCard from "./adaptiveCards/welcome.json";
-import rawLearnCard from "./adaptiveCards/learn.json";
 import rawNewObjectiveCard from "./adaptiveCards/newObjective.json";
 import { AdaptiveCards } from "@microsoft/adaptivecards-tools";
 
@@ -40,12 +39,6 @@ export class TeamsBot extends TeamsActivityHandler {
           await context.sendActivity({ attachments: [CardFactory.adaptiveCard(card)] });
           break;
         }
-        case "learn": {
-          this.likeCountObj.likeCount = 0;
-          const card = AdaptiveCards.declare<DataInterface>(rawLearnCard).render(this.likeCountObj);
-          await context.sendActivity({ attachments: [CardFactory.adaptiveCard(card)] });
-          break;
-        }
         case "add objective": {
           const card = AdaptiveCards.declareWithoutData(rawNewObjectiveCard).render();
           await context.sendActivity({ attachments: [CardFactory.adaptiveCard(card)] });
@@ -74,24 +67,5 @@ export class TeamsBot extends TeamsActivityHandler {
       }
       await next();
     });
-  }
-
-  // Invoked when an action is taken on an Adaptive Card. The Adaptive Card sends an event to the Bot and this
-  // method handles that event.
-  async onAdaptiveCardInvoke(
-    context: TurnContext,
-    invokeValue: AdaptiveCardInvokeValue
-  ): Promise<AdaptiveCardInvokeResponse> {
-    // The verb "userlike" is sent from the Adaptive Card defined in adaptiveCards/learn.json
-    if (invokeValue.action.verb === "userlike") {
-      this.likeCountObj.likeCount++;
-      const card = AdaptiveCards.declare<DataInterface>(rawLearnCard).render(this.likeCountObj);
-      await context.updateActivity({
-        type: "message",
-        id: context.activity.replyToId,
-        attachments: [CardFactory.adaptiveCard(card)],
-      });
-      return { statusCode: 200, type: undefined, value: undefined };
-    }
   }
 }

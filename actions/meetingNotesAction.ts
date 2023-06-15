@@ -1,7 +1,7 @@
 import { TurnContext } from 'botbuilder';
-import { Application, ConversationHistory } from '@microsoft/teams-ai';
+import { Application } from '@microsoft/teams-ai';
 import { ApplicationTurnState } from '../index';
-import { IEmployee, IObjective, IDataEntities } from '../interfaces';
+import { IMeetingNotes, IDataEntities } from '../interfaces';
 import { stat } from 'fs';
 
 /**
@@ -12,10 +12,9 @@ export function meetingNotesAction(app: Application<ApplicationTurnState>): void
         const action = (data.operation ?? '').toLowerCase();
         switch (action) {
             case 'save':
-                return await saveMeetingNotes(app, context, state);
+                return await saveMeetingNotes(app, context, state, data);
             default:
-                await context.sendActivity(`[map.${action}]`);
-                return true;
+                return await saveMeetingNotes(app, context, state, data);
         }
       });
 }
@@ -28,22 +27,29 @@ export function meetingNotesAction(app: Application<ApplicationTurnState>): void
 async function saveMeetingNotes(
     app: Application<ApplicationTurnState>,
     context: TurnContext,
-    state: ApplicationTurnState
+    state: ApplicationTurnState,
+    data: IDataEntities
 ): Promise<boolean> {
     // Use the employee object to answer the human
-    const newResponse = await app.ai.completePrompt(context, state, 'suggestTalkingPoints');
+    const newResponse = await app.ai.completePrompt(context, state, 'summariseMeetingNote');
     if (newResponse) {
-        if (state.conversation.value.talkingPointSuggestions == undefined)
-        {
-            state.conversation.value.talkingPointSuggestions = [newResponse];
+        let newNote: IMeetingNotes = {
+            employeeName: (data.employee.name ?? 'UNKNOWN'),
+            date: new Date(),
+            notes: newResponse
+        }
+
+        if (state.user.value.meetingNotes == undefined)
+        {            
+            state.user.value.meetingNotes = [newNote];
         }
         else
         {
-            state.conversation.value.talkingPointSuggestions.push(newResponse);
+            state.user.value.meetingNotes.push(newNote);
         }
-        await context.sendActivity(newResponse);
+        await context.sendActivity(`I've saved the following meeting note for ${data.employee.name}: ${newResponse}`);
     } else {
-        await context.sendActivity("Error finding that information. Please try again.");
+        await context.sendActivity("Error parsing that information. Please try again.");
     }
 
     return false;

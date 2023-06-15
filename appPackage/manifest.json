@@ -5,8 +5,8 @@
     "id": "${{TEAMS_APP_ID}}",
     "packageName": "com.microsoft.teams.extension",
     "developer": {
-        "name": "Teams App, Inc.",
-        "websiteUrl": "https://www.example.com",
+        "name": "Phenomenon Creations Ltd.",
+        "websiteUrl": "https://www.PhenomenonCreations.com",
         "privacyUrl": "https://www.example.com/termofuse",
         "termsOfUseUrl": "https://www.example.com/privacy"
     },
@@ -15,8 +15,8 @@
         "outline": "outline.png"
     },
     "name": {
-        "short": "AlexTestBot1-${{TEAMSFX_ENV}}",
-        "full": "full name for AlexTestBot1"
+        "short": "Bot21-${{TEAMSFX_ENV}}",
+        "full": "Bot21 - a 1-2-1 meeting assistant"
     },
     "description": {
         "short": "short description for AlexTestBot1",
@@ -43,19 +43,19 @@
                     "commands": [
                         {
                             "title": "welcome",
-                            "description": "Resend welcome card of this Bot"
+                            "description": "Have Bot21 re-introduce itself"
                         },
                         {
                             "title": "learn",
-                            "description": "Learn about Adaptive Card and Bot Command"
+                            "description": "Learn about what you can do with Bot21"
                         },
                         {
                             "title": "add objective",
-                            "description": "Add an objective for an employee"
+                            "description": "Add an objective for a new or existing employee"
                         },
                         {
                             "title": "list employees",
-                            "description": "List your employees and their saved objectives"
+                            "description": "List all of your employees and their objectives"
                         }
                     ]
                 }

@@ -1,0 +1,5 @@
+Summarise the following note provided by a manager about one of their employees into a summary that is less than 150 words.
+Note:
+{{$input}}
+
+Summary:

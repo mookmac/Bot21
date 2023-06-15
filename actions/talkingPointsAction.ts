@@ -14,7 +14,7 @@ export function talkingPointsAction(app: Application<ApplicationTurnState>): voi
             case 'suggest':
                 return await suggestTalkingPoints(app, context, state);
             default:
-                await context.sendActivity(`[map.${action}]`);
+                await context.sendActivity(`Oops, my programmer hasn't implemented the ${action} path of 'talkingPoints' yet!`);
                 return true;
         }
       });

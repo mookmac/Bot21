@@ -33,7 +33,7 @@ import { AI,
   OpenAIPlanner, 
   ResponseParser } from "@microsoft/teams-ai";
 import { randomInt } from 'crypto';
-import { IEmployee, IObjective, IDataEntities } from './interfaces';
+import { IEmployee, IObjective, IDataEntities, IMeetingNotes } from './interfaces';
 import { stat } from 'fs';
 import { addActions } from './actions';
 
@@ -99,7 +99,7 @@ export interface ConversationState extends DefaultConversationState {
 export interface UserState extends DefaultUserState {
   managerName: string;
   employees: IEmployee[];
-  addOneSaid: boolean;
+  meetingNotes: IMeetingNotes[];
 }
 export interface TempState extends DefaultTempState {
   prompt: string;
@@ -208,11 +208,34 @@ app.message(/list employees/i, async (context, state) => {
   }
 });
 
+app.message(/welcome/i, async (context, state) => {
+  await context.sendActivity(`Hi ${state.user.value.managerName}, my name is Bot21. I'm designed to help you run more effective 1-2-1 meetings with your employees. Type "learn" to get more information on what I can do.`);
+  if (state.user.value.employees != undefined)
+  {
+    await context.sendActivity(`Here's the information I'm holding for you on your employees. You can view this at any time just by saying "list employees". Click on the employee name to see a summary of their objectives.`);
+    const card = AdaptiveCards.declare<UserState>(rawListEmployeesCard).render(state.user.value);
+    await context.sendActivity({ attachments: [CardFactory.adaptiveCard(card)] });
+  }
+});
+
+app.message(/^\s?learn\s?$/i, async (context, state) => {
+  await context.sendActivity(`I'm designed to help you run more effective 1-2-1 meetings with your employees. Some commands you can say are:\n\n
+  - "Welcome"\n
+  - "Learn"\n
+  - "Add Objective"\n
+  - "List Employees"\n
+  \n
+  You can also speak in natural language to me.\n
+  Try asking for suggested talking points for your next 1-2-1 meeting. You could also ask me update or remove objectives, keep notes of what you've discussed with your employee, and for icebreakers - to get the conversation flowing at your next meeting.`);
+});
+
 //listen for reset message
 const resetRegex = `/^(?:.*\s)?\/(reset|restart)|^(reset|restart)\(?\)?$/i`;
 app.message(resetRegex, async (context, state) => {
   state.conversation.delete();
+  ConversationHistory.clear(state);  
   await context.sendActivity(`Ok I have deleted the conversation history.`);
+  state.temp.value.prompt = 'welcome';
 });
 
 interface newObjectiveCardData {

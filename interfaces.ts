@@ -16,3 +16,9 @@ export interface IDataEntities {
     operation: string;
     employee: IEmployee;
 }
+
+export interface IMeetingNotes {
+    employeeName: string;
+    notes: string;
+    date: Date;
+}

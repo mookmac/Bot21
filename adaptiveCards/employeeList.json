@@ -15,23 +15,46 @@
             "items": [
                 {
                     "type": "ColumnSet",
+                    "selectAction": {
+                        "type": "Action.ToggleVisibility",
+                        "title": "expand",
+                        "targetElements": [
+                            "cardContent${$index}",
+                            "chevronDown${$index}",
+                            "chevronUp${$index}"
+                        ]
+                    },
                     "columns": [
                         {
                             "type": "Column",
                             "width": "stretch",
-                            "selectAction": {
-                                "type": "Action.ToggleVisibility",
-                                "title": "expand",
-                                "targetElements": [
-                                    "cardContent${$index}"
-                                ]
-                            },
                             "id": "employeeName",
                             "items": [
                                 {
                                     "type": "TextBlock",
                                     "text": "${name}",
                                     "wrap": true
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "width": "auto",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "id": "chevronDown${$index}",
+                                    "url": "https://adaptivecards.io/content/down.png",
+                                    "horizontalAlignment": "Right",
+                                    "size": "Small"
+                                },
+                                {
+                                    "type": "Image",
+                                    "id": "chevronUp${$index}",
+                                    "url": "https://adaptivecards.io/content/up.png",
+                                    "horizontalAlignment": "Right",
+                                    "size": "Small",
+                                    "isVisible": false
                                 }
                             ]
                         }
@@ -112,7 +135,7 @@
                                         {
                                             "type": "TextBlock",
                                             "weight": "Bolder",
-                                            "text": "${targetCompletionDate}",
+                                            "text": "${formatDateTime(targetCompletionDate, 'dd-MMM-yy')}",
                                             "wrap": true
                                         }
                                     ],
@@ -135,7 +158,8 @@
                         }
                     ],
                     "isVisible": false,
-                    "id": "cardContent${$index}"
+                    "id": "cardContent${$index}",
+                    "style": "accent"
                 }
             ],
             "$data": "${employees}"

@@ -2,6 +2,7 @@ import { TurnContext } from 'botbuilder';
 import { Application, ConversationHistory } from '@microsoft/teams-ai';
 import { ApplicationTurnState } from '../index';
 import { IEmployee, IObjective, IDataEntities } from '../interfaces';
+import { stat } from 'fs';
 
 /**
  * @param app
@@ -32,8 +33,15 @@ async function suggestTalkingPoints(
     // Use the employee object to answer the human
     const newResponse = await app.ai.completePrompt(context, state, 'suggestTalkingPoints');
     if (newResponse) {
+        if (state.conversation.value.talkingPointSuggestions == undefined)
+        {
+            state.conversation.value.talkingPointSuggestions = [newResponse];
+        }
+        else
+        {
+            state.conversation.value.talkingPointSuggestions.push(newResponse);
+        }
         await context.sendActivity(newResponse);
-        ConversationHistory.appendToLastLine(state, ` THEN SAY ${newResponse}`);
     } else {
         await context.sendActivity("Error finding that information. Please try again.");
     }

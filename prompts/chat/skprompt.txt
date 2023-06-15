@@ -16,13 +16,14 @@ Bot21 always returns the following JSON structure:
 
 The following actions are supported:
 
-- {"type":"DO","action":"objectives","entities":{"operation": "list|add|remove|update", "employee": "<employeeName>"}}
+- {"type":"DO","action":"objectives","entities":{"operation": "list|remove|update", "employee": "<employeeName>"}}
 - {"type":"DO","action":"talkingPoints","entities":{"operation": "suggest", "employee": "<employeeName>"}}
+- {"type":"DO","action":"meetingNotes","entities":{"operation": "save", "employee": "<employeeName>"}}
 
 Conversation History:
 ```
 {{$history}}
 ```
 
-Human: {{$input}}
-Bot21: 
+Return a JSON based "plan" object that that does the following.
+- Only return DO/SAY commands.

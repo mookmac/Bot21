@@ -12,13 +12,9 @@
             "type": "Container",
             "items": [
                 {
-                    "type": "TextBlock",
-                    "text": "Employee Name:",
-                    "wrap": true
-                },
-                {
                     "type": "Input.Text",
-                    "id": "employeeName"
+                    "id": "employeeName",
+                    "label": "Employee Name:"
                 },
                 {
                     "type": "Container",
@@ -27,49 +23,37 @@
                             "type": "Container",
                             "items": [
                                 {
-                                    "type": "TextBlock",
-                                    "text": "Title:",
-                                    "wrap": true
+                                    "type": "Input.Text",
+                                    "id": "title",
+                                    "label": "Title:",
+                                    "isRequired": true,
+                                    "errorMessage": "You must provide a title for this objective"
                                 },
                                 {
                                     "type": "Input.Text",
-                                    "id": "title"
-                                },
-                                {
-                                    "type": "TextBlock",
-                                    "text": "Description:",
-                                    "wrap": true
-                                },
-                                {
-                                    "type": "Input.Text",
-                                    "id": "description"
-                                },
-                                {
-                                    "type": "TextBlock",
-                                    "text": "Target Completion Date:",
-                                    "wrap": true
+                                    "id": "description",
+                                    "label": "Description:",
+                                    "isMultiline": true
                                 },
                                 {
                                     "type": "Input.Date",
-                                    "id": "targetCompletionDate"
-                                },
-                                {
-                                    "type": "TextBlock",
-                                    "text": "How to measure objective progress:",
-                                    "wrap": true
+                                    "id": "targetCompletionDate",
+                                    "label": "Target completion date:"
                                 },
                                 {
                                     "type": "Input.Text",
-                                    "id": "measure"
-                                },
-                                {
-                                    "type": "TextBlock",
-                                    "text": "Current Progress:",
-                                    "wrap": true
+                                    "id": "measure",
+                                    "label": "How we will measure objective progress:"
                                 },
                                 {
                                     "type": "Input.Number",
-                                    "id": "progress"
+                                    "id": "progress",
+                                    "max": 100,
+                                    "min": 0,
+                                    "value": 0,
+                                    "label": "Progress %",
+                                    "isRequired": true,
+                                    "errorMessage": "Please provide a value for the current progress towards achieving this objective as a percentage."
                                 }
                             ]
                         }

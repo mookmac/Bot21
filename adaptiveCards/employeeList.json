@@ -1,0 +1,144 @@
+{
+    "type": "AdaptiveCard",
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.4",
+    "body": [
+        {
+            "type": "TextBlock",
+            "text": "Your Employees",
+            "wrap": true,
+            "weight": "Bolder",
+            "size": "ExtraLarge"
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "stretch",
+                            "selectAction": {
+                                "type": "Action.ToggleVisibility",
+                                "title": "expand",
+                                "targetElements": [
+                                    "cardContent${$index}"
+                                ]
+                            },
+                            "id": "employeeName",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "text": "${name}",
+                                    "wrap": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "text": "Objectives",
+                            "wrap": true,
+                            "weight": "Bolder",
+                            "size": "Large"
+                        },
+                        {
+                            "type": "ColumnSet",
+                            "columns": [
+                                {
+                                    "type": "Column",
+                                    "items": [
+                                        {
+                                            "type": "TextBlock",
+                                            "weight": "Bolder",
+                                            "text": "Title",
+                                            "wrap": true
+                                        }
+                                    ],
+                                    "width": "stretch",
+                                    "id": "title"
+                                },
+                                {
+                                    "type": "Column",
+                                    "items": [
+                                        {
+                                            "type": "TextBlock",
+                                            "weight": "Bolder",
+                                            "text": "Due Date",
+                                            "wrap": true
+                                        }
+                                    ],
+                                    "width": "stretch",
+                                    "id": "targetCompletionDate"
+                                },
+                                {
+                                    "type": "Column",
+                                    "items": [
+                                        {
+                                            "type": "TextBlock",
+                                            "weight": "Bolder",
+                                            "text": "Progress",
+                                            "wrap": true
+                                        }
+                                    ],
+                                    "width": "stretch",
+                                    "id": "progress"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "ColumnSet",
+                            "columns": [
+                                {
+                                    "type": "Column",
+                                    "items": [
+                                        {
+                                            "type": "TextBlock",
+                                            "weight": "Bolder",
+                                            "text": "${title}",
+                                            "wrap": true
+                                        }
+                                    ],
+                                    "width": "stretch"
+                                },
+                                {
+                                    "type": "Column",
+                                    "items": [
+                                        {
+                                            "type": "TextBlock",
+                                            "weight": "Bolder",
+                                            "text": "${targetCompletionDate}",
+                                            "wrap": true
+                                        }
+                                    ],
+                                    "width": "stretch"
+                                },
+                                {
+                                    "type": "Column",
+                                    "items": [
+                                        {
+                                            "type": "TextBlock",
+                                            "weight": "Bolder",
+                                            "text": "${progress}%",
+                                            "wrap": true
+                                        }
+                                    ],
+                                    "width": "stretch"
+                                }
+                            ],
+                            "$data": "${objectives}"
+                        }
+                    ],
+                    "isVisible": false,
+                    "id": "cardContent${$index}"
+                }
+            ],
+            "$data": "${employees}"
+        }
+    ]
+}
